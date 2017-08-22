@@ -5,7 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>BizLight Theme</title>
-    <link rel="stylesheet" href="css/app.css">
+    
+    <?php wp_head(); ?>
   </head>
 
   <body>
@@ -21,20 +22,30 @@
           </button>
           <a class="navbar-brand" href="#">Bizlight Theme</a>
         </div>
-        <div id="navbar" class="collapse navbar-collapse">
+        <?php
+                wp_nav_menu( array(
+                  'theme_location' => 'menu-1',
+                  'container_id'   => 'navbar',
+                  'container_class' => 'collapse navbar-collapse',
+                  'menu_class'     => 'nav navbar-nav',
+
+                ) );
+        ?>
+       <!--  <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li class="active"><a href="index.html">Home</a></li>
             <li><a href="about.html">About</a></li>
             <li><a href="services.html">Services</a></li>
             <li><a href="contact.html">Contact</a></li>
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
+
+          </ul> -->
+        <!--  <ul class="nav navbar-nav navbar-right">
             <li><a href="http://twitter.com"><i class="fa fa-twitter"></i></a></li>
             <li><a href="http://facebook.com"><i class="fa fa-facebook"></i></a></li>
             <li><a href="http://google-plus.com"><i class="fa fa-google-plus"></i></a></li>
             <li><a href="http://linkedin.com"><i class="fa fa-linkedin"></i></a></li>
           </ul>
-        </div><!--/.nav-collapse -->
+        </div>/.nav-collapse -->
       </div>
     </nav>
 
@@ -118,7 +129,7 @@
             </div>
           </div>
           <div class="col-md-6">
-            <img src="img/cpu.jpg">
+            <img src="<?php echo get_template_directory_uri(); ?>/img/cpu.jpg">
           </div>
         </div>
       </div>
@@ -127,7 +138,10 @@
     <div class="section-c">
       <div class="container">
         <div class="row">
-          <div class="col-md-8 col-md-offset-2">
+        <?php if ( is_active_sidebar( 'footer-widget' ) ) : ?>           
+                <?php dynamic_sidebar( 'footer-widget' ); ?>          
+        <?php endif; ?>
+          <!-- <div class="col-md-8 col-md-offset-2">
             <h2>Subscribe To Our Newsletter</h2>
             <br />
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sed sem rhoncus urna iaculis faucibus.</p>
@@ -137,7 +151,7 @@
               <br />
               <button class="btn btn-primary btn-lg btn-block">Submit</button>
             </form>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -148,7 +162,8 @@
       </div>
     </footer>
 
-    <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="bower_components/bootstrap-sass/assets/javascripts/bootstrap.js"></script>
+    <script src="<?php echo get_template_directory_uri(); ?>/bower_components/jquery/dist/jquery.js"></script>
+    <script src="<?php echo get_template_directory_uri(); ?>/bower_components/bootstrap-sass/assets/javascripts/bootstrap.js"></script>
+    <?php wp_footer(); ?>
   </body>
 </html>
